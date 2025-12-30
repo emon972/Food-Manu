@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AR Food Menu</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- A-FRAME -->
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+<!-- MINDAR IMAGE -->
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+a-scene {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: black;
+}
+</style>
+
+<script>
+AFRAME.registerComponent("rotate-slow", {
+  tick: function () {
+    this.el.object3D.rotation.y += 0.002;
+  }
+});
+</script>
+</head>
+
+<body>
+
+<a-scene
+  embedded
+  mindar-image="imageTargetSrc: targets.mind; autoStart: true;"
+  vr-mode-ui="enabled:false"
+  device-orientation-permission-ui="enabled:false"
+  renderer="colorManagement:true; physicallyCorrectLights:true">
+
+<!-- LIGHTS -->
+<a-entity light="type: ambient; intensity: 1"></a-entity>
+<a-entity light="type: directional; intensity: 1.2" position="1 2 1"></a-entity>
+
+<!-- IMAGE TARGET -->
+<a-entity mindar-image-target="targetIndex: 0">
+
+<!-- LOGO (CENTER) -->
+<a-image src="logo.png" position="0 1.6 0" scale="0.9 0.9 0.9"></a-image>
+
+<!-- 🍔 BURGER -->
+<a-entity position="-1 0 0" rotate-slow>
+  <a-cylinder radius="0.25" height="0.08" color="#C68642" position="0 0.18 0"></a-cylinder>
+  <a-cylinder radius="0.26" height="0.05" color="#7A3E1D"></a-cylinder>
+  <a-cylinder radius="0.25" height="0.08" color="#F2C94C" position="0 -0.18 0"></a-cylinder>
+</a-entity>
+
+<!-- 🍕 PIZZA -->
+<a-entity position="1 0 0" rotate-slow>
+  <a-cylinder radius="0.3" height="0.05" color="#F4A261"></a-cylinder>
+</a-entity>
+
+<!-- 🥪 SANDWICH -->
+<a-entity position="-1 -1 0" rotate-slow>
+  <a-box width="0.45" height="0.06" depth="0.25" color="#EED6A3" position="0 0.1 0"></a-box>
+  <a-box width="0.45" height="0.05" depth="0.25" color="#9C6644"></a-box>
+  <a-box width="0.45" height="0.06" depth="0.25" color="#EED6A3" position="0 -0.1 0"></a-box>
+</a-entity>
+
+<!-- 🥤 COLD DRINK -->
+<a-entity position="1 -1 0" rotate-slow>
+  <a-cylinder radius="0.15" height="0.6" color="#4D96FF"></a-cylinder>
+</a-entity>
+
+<!-- 🍟 FRIES -->
+<a-entity position="-0.6 -2 0" rotate-slow>
+  <a-box width="0.08" height="0.4" depth="0.08" color="#FFD166" position="-0.1 0 0"></a-box>
+  <a-box width="0.08" height="0.35" depth="0.08" color="#FFD166"></a-box>
+  <a-box width="0.08" height="0.45" depth="0.08" color="#FFD166" position="0.1 0 0"></a-box>
+</a-entity>
+
+<!-- ☕ COFFEE -->
+<a-entity position="0.6 -2 0" rotate-slow>
+  <a-cylinder radius="0.2" height="0.3" color="#6F4E37"></a-cylinder>
+</a-entity>
+
+</a-entity>
+
+<!-- CAMERA (NO MOTION SENSOR) -->
+<a-camera look-controls="enabled:false"></a-camera>
+
+</a-scene>
+
+</body>
+</html>
